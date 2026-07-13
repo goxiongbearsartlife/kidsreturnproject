@@ -1,0 +1,36 @@
+
+/* === Cards Grid Styles === */
+.cards { max-width: 1180px; margin: 4rem auto; padding: 0 1rem; }
+.cards__title { font-weight: 900; font-size: clamp(1.5rem, 2vw, 2rem); margin: 0 0 1rem; letter-spacing: -0.015em; }
+.cards__toolbar { margin: 0 0 1rem; }
+.cards__search {
+  width: min(420px, 100%); padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 12px;
+  font-size: .95rem; outline: none;
+}
+.cards__search:focus { border-color: #666; box-shadow: 0 0 0 3px rgba(0,0,0,.06); }
+
+.cards__grid {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(1, minmax(0,1fr));
+}
+@media (min-width: 640px){ .cards__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 1024px){ .cards__grid{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (min-width: 1280px){ .cards__grid{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+.card {
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.05);
+  transition: box-shadow .2s ease;
+}
+.card:hover { box-shadow: 0 8px 22px rgba(0,0,0,.08); }
+
+.card__media { position: relative; aspect-ratio: 4/3; background:#f3f3f3; overflow:hidden; }
+.card__video, .card__img { width:100%; height:100%; object-fit: cover; display:block; }
+.card__media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); pointer-events:none; }
+
+.card__copy { padding: 14px 16px 18px; }
+.card__title { margin: 0; font-weight: 900; font-size: 1.25rem; line-height: 1.2; letter-spacing:-.01em; }
+.card__meta { margin:.5rem 0 0; color:#666; font-size:.9rem; }
+.card__desc { margin:.4rem 0 0; color:#444; font-size:.92rem; line-height:1.35; }
+.card__link { margin-top:.4rem; }
+.card__link a { text-decoration: none; font-weight: 700; }

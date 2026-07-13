@@ -1,0 +1,358 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KIDS RETURN — Thesis by Li Yian</title>
+  <meta name="description" content="KIDS RETURN — a senior nursery in an abandoned rural school. Architecture as Piper: memory, play, return.">
+  <link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/cards.css">
+</head>
+<script>
+(function(){
+  // 1) Load inline data (already in the file)
+  var dataTag = document.getElementById('program-data');
+  var items = [];
+  try { items = JSON.parse(dataTag.textContent); } catch(e){ console.error(e); }
+
+  // 2) Render
+  var grid = document.getElementById('cardsGrid');
+  if (!grid) return;
+
+  grid.innerHTML = items.map(function(it){
+    // Prefer MP4 for performance; if you want GIF, set media_gif in JSON and leave media_mp4 empty
+    var media = it.media_mp4
+      ? '<video class="card__video" src="' + it.media_mp4 + '" autoplay muted loop playsinline preload="auto"' + (it.poster_img ? ' poster="' + it.poster_img + '"' : '') + '></video>'
+      : (it.media_gif ? '<img class="card__img" src="' + it.media_gif + '" alt="' + (it.alt||"") + '">' : '<div class="card__img" style="background:#eee;display:grid;place-items:center;color:#999">No media</div>');
+
+    return (
+      '<article class="card">' +
+        '<div class="card__media">' + media + '</div>' +
+        '<div class="card__copy">' +
+          '<h3 class="card__title">' + (it.title || '') + '</h3>' +
+          '<p class="card__meta">' + (it.city || '') + ', ' + (it.country || '') + '; ' + (it.year || '') + '; <span>' + (it.duration || '') + '</span></p>' +
+        '</div>' +
+      '</article>'
+    );
+  }).join('');
+
+  // 3) Force-play any stubborn videos (some browsers need a nudge even with autoplay)
+  document.querySelectorAll('.card__video').forEach(function(v){
+    v.muted = true;
+    v.play().catch(function(){ /* ignore */ });
+  });
+
+  // 4) Search filter (unchanged)
+  var search = document.getElementById('cardsSearch');
+  if (search) {
+    search.addEventListener('input', function(e){
+      var q = (e.target.value||'').toLowerCase().trim();
+      Array.prototype.forEach.call(grid.querySelectorAll('.card'), function(card){
+        var t = (card.querySelector('.card__title')||{}).textContent || '';
+        var m = (card.querySelector('.card__meta')||{}).textContent || '';
+        card.style.display = (t+m).toLowerCase().indexOf(q) > -1 ? '' : 'none';
+      });
+    });
+  }
+})();
+</script>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="hero" id="top">
+    <div class="hero__bg" style="background-image:url('assets/img/cover_klein.png');"></div>
+    <div class="hero__inner">
+      <h1>KIDS <span>RETURN</span></h1>
+      <p class="tag">Architecture as the Piper — memory, play, and return.</p>
+      <a href="#ghost" class="btn">Enter</a>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#ghost">Ghost School</a>
+    <a href="#piper">Piper Narrative</a>
+    <a href="#tracks">Spatial Tracks</a>
+    <a href="#models">Fragments</a>
+    <a href="#statement">Statement</a>
+  </nav>
+
+  <section id="ghost" class="section">
+    <div class="kicker">Context</div>
+    <h2>Ghost School</h2>
+    <p class="lede">
+      Since 2001, more than <strong>370,000</strong> rural schools in China have closed. Each closure erases daily rituals, social cohesion, and spatial identity.
+      This project reimagines an abandoned primary school in Hongguang Village, Zunyi, Guizhou as a senior nursery for the people who once studied there as children.
+    </p>
+    <div class="grid two">
+      <figure class="shot"><img src="assets/img/axon_top.png" alt="axon top"><figcaption>Axon — overall composition</figcaption></figure>
+      <figure class="shot"><img src="assets/img/axon_persp.png" alt="axon perspective"><figcaption>Axon — street-facing tower & facade</figcaption></figure>
+
+    </div>
+ <div class="grid two">
+      <figure class="shot"><img src="assets/img/site.png" alt="site"><figcaption>Site</figcaption></figure>
+      <figure class="shot"><img src="assets/img/conflict.png" alt="conflict"><figcaption>Conflict — ghost school</figcaption></figure>
+
+    </div>    
+  </div>
+ <div class="grid two">
+      <figure class="shot"><img src="assets/img/commonality.png" alt="site"><figcaption>COMMONALITY--a nursery for the elders</figcaption></figure>
+      <figure class="shot"><img src="assets/img/liminality.png" alt="conflict"><figcaption>LIMINALITY: DREAMCORE AETHENTICS— fragments of memory</figcaption></figure>
+
+    </div>
+
+  </section>
+
+  <section id="piper" class="section alt">
+    <div class="kicker">Narrative</div>
+    <h2>The Piper</h2>
+    <p class="lede">
+      Referencing Ilya Kabakov’s <em>School No. 6</em>,and the Pied Piper of Hamelin, the building takes on the role of the Piper—provoking, luring, and awakening. The story reveals a state of liminality as children become adults and it shows the dilemmas the piper is facing. The piper could be an evoker and have this capability to raise the awareness of the children or the rats but he is weak in the adult world without power, resources and other companions. The Architecture could be an approach that embraces conflict, memory, and playfulness to provoke awakening and resist control. It challenges the viewer to see architecture not as a passive structure, but as an active force of creativity, disruption, and revelation — like the piper. Or the music that lures you.
+ Escape can also be a return.
+    </p>
+   <div class="grid two">
+      <figure class="shot"><img src="assets/img/no61.png" alt="refer"><figcaption>Ilya Kabakov’s School No. 6, which presents memory as a fragmented spatial experience,
+how memory can be spatially fragmented yet still deeply resonant.</figcaption></figure>
+      <figure class="shot"><img src="assets/img/no62.png" alt="refere"><figcaption> </figcaption></figure>
+
+    </div>
+
+    </div class="grid one">
+    <figure class="full"><img src="assets/img/ANSTRACT.png" alt="pied piper"><figcaption>The piper--The design references the narrative of The pipe piper of Hamelin, The Piper’s story 
+The Pied Piper of Hamelin is a German tale about a piper who helps the townspeople get rid of a rat infestation by playing music. However, the adults refuse to pay him as promised beforehand so he plays his pipe again and leads the children to escape away from the town and never go back. 
+The characters inside the story are interesting to analyze and I think they contain something eternal as the story has a longer lifespan than us.
+</figcaption></figure>
+
+   </div class="grid one">
+    <figure class="full"><img src="assets/img/Doppelgänger.png" alt="Doppelgänger"><figcaption>Kids Return: Doppelgänger--The Piper.</figcaption></figure>
+   </div class="grid one">
+    <figure class="full"><img src="assets/img/axon_render.png" alt="axon render"><figcaption>Render</figcaption></figure>
+
+    <div class="embed-wrap">
+  <iframe
+    class="embed"
+    src="https://www.youtube.com/embed/qGelM86ghlI"
+    title="Kids Return Project Video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+
+
+  </iframe>
+</div>
+<p class="video-caption">
+AI becomes an extension of this research rather than merely a production tool. It allows architecture to unfold as cinema, memory as landscape, and fiction as spatial experience. Through AI, I explore impossible worlds where architecture becomes narrative, dreams become inhabitable, and memory remains unfinished.
+</p>
+
+  </section>
+
+
+  <section id="tracks" class="section">
+    <div class="kicker">Plan as Playlist</div>
+
+    <figure class="full"><img src="assets/img/plan_color.png" alt="plan"><figcaption>Plan — 1st floor: library, café, lounge, courtyard; second floor: auditorium, music room, dancing room, bathhouse, adults’ tower; third floor: rooftop farm, napping space.</figcaption></figure>
+  <figure class="full"><img src="assets/img/plan_monochrome.png" alt="plan"><figcaption>Journey —The hallway and the rats’ square connect with the beginning of the story. The journey follows the library lounge, auditorium, rest, farm, bath, and therapy terrace, mirroring an escape route of the Piper and the children. </figcaption></figure>
+
+  </section>
+<section id="tracks" class="cards">
+  <h2 class="cards__title">Spatial Tracks</h2>
+  <div class="cards__toolbar">
+    <input id="cardsSearch" class="cards__search" placeholder="Search your 'dreamcore'" />
+  </div>
+  <div id="cardsGrid" class="cards__grid"><article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/01BREEZEBOX.GIF" muted loop playsinline preload="metadata" poster="assets/media/01BREEZEBOX.GIF" aria-label="Looping video of KIDS RETURN #01: BREEZEBOX"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #01: BREEZEBOX</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/02RECEPTION.GIF" muted loop playsinline preload="metadata" poster="assets/media/02RECEPTION.GIF" aria-label="Looping video of KIDS RETURN #02: RECEPTION"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #02: RECEPTION</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>3:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/03HALLWAY.GIF" muted loop playsinline preload="metadata" poster="assets/media/03HALLWAY.GIF" aria-label="Looping video of KIDS RETURN #03: HALLWAY"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #03: HALLWAY</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/03library.gif" muted loop playsinline preload="metadata" poster="assets/media/03library.gif" aria-label="Looping video of KIDS RETURN #04: LOUNGE"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #04: LIBRARY</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>8:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/05CAFE.GIF" muted loop playsinline preload="metadata" poster="assets/media/05CAFE.GIF" aria-label="Looping video of KIDS RETURN #05: CAFÉ"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #05: CAFÉ</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>4:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/818 audio.gif" muted loop playsinline preload="metadata" poster="assets/media/818 audio.gif" aria-label="Looping video of KIDS RETURN #06: AUDITORIUM"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #06: AUDIORIUM</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/07DANCING.GIF" muted loop playsinline preload="metadata" poster="assets/media/07DANCING.GIF" aria-label="Looping video of KIDS RETURN #07: DANCE THERAPY"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #07: DANCING THERAPY</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/08MUSIC.GIF" muted loop playsinline preload="metadata" poster="assets/media/08MUSIC.GIF" aria-label="Looping video of KIDS RETURN #08: MUSIC THERAPY"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #08: MUSIC THERAPY</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/09PAINTING.GIF" muted loop playsinline preload="metadata" poster="assets/media/09PAINTING.GIF" aria-label="Looping video of KIDS RETURN #09: PAINTING THERAPY"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #09: PAINTING THERAPY</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/12ROOFFARM.GIF" muted loop playsinline preload="metadata" poster="assets/media/12ROOFFARM.GIF" aria-label="Looping video of KIDS RETURN #10: ROOFTOP FARM"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #10: ROOFTOP FARM</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/13NAPPING.GIF" muted loop playsinline preload="metadata" poster="assets/media/13NAPPING.GIF" aria-label="Looping video of KIDS RETURN #11: NAPPING SPACE"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #11: NAPPING SPACE</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/14TERRACE.GIF" muted loop playsinline preload="metadata" poster="assets/media/14TERRACE.GIF" aria-label="Looping video of KIDS RETURN #12: TERRACE GARDEN"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #12: TERRACE GARDEN</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/14ADULTSTOWER.GIF" muted loop playsinline preload="metadata" poster="assets/media/14ADULTSTOWER.GIF" aria-label="Looping video of KIDS RETURN #13: ADULTS' TOWER"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #13: ADULTS' TOWER</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2034; <span>1:27 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/04LOUNGE.GIF" muted loop playsinline preload="metadata" poster="assets/media/04LOUNGE.GIF" aria-label="Looping video of KIDS RETURN #14: RATS SQUARE"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #14: LOUNGE</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2024; <span>3:08 min</span></p>
+  </div>
+</article>
+
+<article class="card">
+  <div class="card__media"><video class="card__video" src="assets/media/15ratssquare.GIF" muted loop playsinline preload="metadata" poster="assets/media/15ratssquare.GIF" aria-label="Looping video of KIDS RETURN #14: RATS SQUARE"></video></div>
+  <div class="card__copy">
+    <h3 class="card__title">KIDS RETURN #15: RATS SQUARE</h3>
+    <p class="card__meta">GUIZHOU, CHINA; 2024; <span>3:08 min</span></p>
+  </div>
+</article>
+
+</div>
+
+</section>
+
+  <section id="models" class="section alt">
+    <div class="kicker">Material Fiction</div>
+    <h2>Fragments</h2>
+    <p class="lede"> The design employs a dreamcore aesthetic, integrating fragments of the original modernist building with new insertions. Each room’s colors, furniture arrangement, and atmosphere connect with the journey of the story. In the end, the terrace garden could be an escape, but also a return.  Physical models and detail studies. Close‑ups.</p>
+    <div class="gallery" id="gallery">
+      <!-- Add more images here -->
+  </div class="grid one">
+    <figure class="full"><img src="assets/img/kr stage.png" alt="model photos"><figcaption>the continuing journey</figcaption></figure>
+  <figure class="full"><img src="assets/img/001.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/1.JPEG" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/02.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/3.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/4.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/5.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/6.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/7.JPg" alt="model photos"><figcaption></figcaption></figure>
+ </div class="grid one">
+    <figure class="full"><img src="assets/img/8.JPg" alt="model photos"><figcaption></figcaption></figure>
+ </div class="grid one">
+    <figure class="full"><img src="assets/img/9.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/10.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/11.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/12.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/13.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/14.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/15.png" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+ <figure class="full"><img src="assets/img/16.JPg" alt="model photos"><figcaption></figcaption></figure> 
+</div class="grid one">
+    <figure class="full"><img src="assets/img/terrace garden model web 2.png" alt="model photos"><figcaption></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="statement" class="section">
+    <div class="kicker">KidsReturn Thesis</div>
+    <h2>Statement</h2>
+    <article class="statement">
+      <p><strong>Kids Return.</strong> Due to centralized education reforms and urban migration, more than 370,000 rural schools in China have closed since 2001. Each closure erases daily rituals, social cohesion, and spatial identity. This thesis reimagines one such school in Hongguang Village, Zunyi, Guizhou—abandoned after only nine years of use—as a senior nursery for the very people who once studied there as children.</p>
+      <p>The project draws from Ilya Kabakov’s <em>School No. 6</em>, which renders memory through fragmented space, and from the tale of the Pied Piper of Hamelin, where children vanish to an unseen destination. Here, the architecture itself becomes the Piper—provoking, luring, and awakening. Escape can also be a return; disappearance becomes transformation.</p>
+      <p>The design employs a dreamcore aesthetic, integrating fragments of the original modernist building with new insertions. Existing classrooms are reconfigured into a library, reception, café, and courtyard. The upper floors host an auditorium, music and dance rooms, nap spaces, and a rooftop farm. A new bathhouse, connected to a central core, doubles as a therapeutic retreat, while a circular “adults’ tower” accommodates administration and security.</p>
+      <p>Each space is choreographed like a track in a concept album—its colors, textures, and light quality shaping the atmosphere of a specific scene. Together, they form a journey that mirrors the Piper’s path, leading visitors through moments of play, contemplation, and encounter.</p>
+      <p>The design stages a continuing journey of the pipers and the children. We enter the senior nursery through patterned-brick hallways where sunlight and shadow weave across the path. Another narrative thread of the rats starting from “rats square”; moves through the library, reception, and café around a tranquil courtyard; ascending to an auditorium, music and dance rooms, nap spaces, and a rooftop farm; culminating in a bathhouse and terrace garden—a space that might be an ending, or a beginning. Here, <em>Escape can also be a return. </em></p>
+      <p>
+Architecture is closely intertwined with “people”, yet people forget what they were. The story reveals a state of liminality as children become adults, showing the dilemmas <em>the Piper</em> faces. <em>The Piper </em>can awaken awareness in children or even rats, yet is powerless in the adult world without resources, allies, or authority. Here, architecture embraces conflict, memory, and playfulness to provoke awakening and resist control. It challenges the viewer to see architecture not as a passive container, but as an active force of creativity, disruption, and revelation—like the Piper, or the music that lures you.</p>
+    </article>
+    <div class="credits">
+      <div>Advisor: Elena Manferdini</div>
+      <div>SCI-Arc DS Graduate Thesis 25</div>
+      <div><a href="https://youtu.be/qGelM86ghlI?si=EkY8MRoeAE5QThLO" target="_blank">Vimeo / YouTube</a> · <a href= "mailto:captainanlie@gmail.com" target="_blank">MailYay1magination</a>· <a href= "https://www.instagram.com/goxiongbearsartlife/" target="_blank">goxiongbearsartlife</a> </ahref="https://kidsreturnproject.org/> · <a href="https://kidsreturnproject.org/" target="_blank">@kidsreturn</a></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a class="top" href="#top">↑</a>
+    <div>© Li Yian — KIDS RETURN</div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
